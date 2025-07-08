@@ -1,0 +1,2 @@
+Create a CICD using GitHub actions to build the custom docker Image and push it to the Images registry,
+then deploy the built Image to our training server.
