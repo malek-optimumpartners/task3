@@ -27,9 +27,9 @@ jobs:
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}  # Must be the actual private key, not base64
+        key: ${{ secrets.SSH_KEY }}
         script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/task3:latest
-            docker stop task3 || true
-            docker rm task3 || true
-            docker run -d --name task3 -p 8000:80 ${{ secrets.DOCKER_USERNAME }}/task3:latest
+          docker pull ${{ secrets.DOCKER_USERNAME }}/task3:latest
+          docker stop task3 || true
+          docker rm task3 || true
+          docker run -d --name task3 -p 8000:80 ${{ secrets.DOCKER_USERNAME }}/task3:latest
