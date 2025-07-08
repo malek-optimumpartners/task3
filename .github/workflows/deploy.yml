@@ -22,17 +22,12 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/task3:latest
 
-    - name: Write SSH key
-      run: |
-        echo "${{ secrets.SSH_KEY_BASE64 }}" | base64 -d > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-
     - name: Deploy to Server via SSH
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY_BASE64 }}
+        key: ${{ secrets.SSH_KEY }}   # ✅ raw private key, NOT base64
         script: |
           docker pull ${{ secrets.DOCKER_USERNAME }}/task3:latest
           docker stop task3 || true
