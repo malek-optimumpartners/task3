@@ -34,4 +34,4 @@ jobs:
           docker stop task3 || true
           docker rm task3 || true
           sudo lsof -t -i:8000 | xargs -r sudo kill -9 || true
-          docker run -d --name task3 -p 8000:80 ${{ secrets.DOCKER_USERNAME }}/task3:latest
+          docker run -d --name task3 -p 8091:80 ${{ secrets.DOCKER_USERNAME }}/task3:latest
