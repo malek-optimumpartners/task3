@@ -1,2 +1,14 @@
 Create a CICD using GitHub actions to build the custom docker Image and push it to the Images registry,
 then deploy the built Image to our training server.
+
+Create a CI/CD pipeline using GitHub Actions that will:
+
+Build Docker images for both the front-end and back-end applications.
+
+Push the built images to the GitHub Container Registry.
+
+Connect the applications to a database (e.g., PostgreSQL or MySQL).
+
+Deploy the Docker images to our training server.
+
+Ensure the entire workflow is fully functional

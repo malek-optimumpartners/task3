@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  backend:
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/backend:latest
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: testdb
+    ports:
+      - "8091:80"
+
+  frontend:
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/frontend:latest
+    ports:
+      - "3099:80"
