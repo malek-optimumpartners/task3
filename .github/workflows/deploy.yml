@@ -29,7 +29,9 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
           docker pull ${{ secrets.DOCKER_USERNAME }}/task3:latest
           docker stop task3 || true
           docker rm task3 || true
+          sudo lsof -t -i:8000 | xargs -r sudo kill -9 || true
           docker run -d --name task3 -p 8000:80 ${{ secrets.DOCKER_USERNAME }}/task3:latest
